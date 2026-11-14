@@ -1,0 +1,40 @@
+{
+  "slug": "creamy-razor-clam-chowder",
+  "name": "Creamy Razor Clam Chowder",
+  "description": "A creamy New England-style chowder made with razor clams, sized for a 3-quart pot.",
+  "servings": 3,
+  "prepMinutes": 15,
+  "cookMinutes": 30,
+  "totalMinutes": 45,
+  "category": "Soup",
+  "tags": ["soup", "seafood"],
+  "basedOn": "Claude",
+  "ingredients": [
+    { "qty": 2, "unit": "slices", "item": "bacon, diced" },
+    { "qty": 0.5, "item": "small onion, diced" },
+    { "qty": 1, "item": "celery stalk, diced" },
+    { "qty": 1, "item": "garlic clove, minced" },
+    { "qty": 2, "unit": "tablespoons", "item": "all-purpose flour" },
+    { "qty": 1, "unit": "cup", "item": "clam juice" },
+    { "qty": 12, "unit": "ounces", "item": "Yukon Gold potatoes, diced" },
+    { "qty": 1, "item": "fresh thyme sprig" },
+    { "qty": 1, "item": "bay leaf" },
+    { "qty": 0.5, "unit": "cup", "item": "heavy cream" },
+    { "qty": 0.5, "unit": "cup", "item": "whole milk" },
+    { "qty": 0.5, "unit": "pound", "item": "chopped razor clams, thawed with their juice" },
+    { "qty": 0.333, "unit": "teaspoon", "item": "black pepper" }
+  ],
+  "steps": [
+    { "title": "Render the bacon", "text": "Cook the bacon in the pot over medium heat until crisp. Remove it and set it aside, leaving the fat in the pot." },
+    { "title": "Sauté the vegetables", "text": "Cook the onion and celery in the bacon fat until soft, about 5 minutes, adding the garlic for the last 30 seconds.", "timerMinutes": 5 },
+    { "title": "Make the roux", "text": "Sprinkle in the flour and stir constantly so it coats the vegetables and cooks out the raw flour taste." },
+    { "title": "Add liquid and potatoes", "text": "Slowly whisk in the clam juice to avoid lumps. Add the potatoes, thyme and bay leaf, and simmer gently until the potatoes are tender." },
+    { "title": "Add the dairy", "text": "Remove the thyme sprig and bay leaf. Stir in the cream and milk, and warm gently without letting it boil." },
+    { "title": "Add the clams", "text": "Stir in the clams with their juice and cook just until opaque. Any longer and they turn rubbery." },
+    { "title": "Season and serve", "text": "Taste first, since the clam juice is already salty. Add the black pepper and a splash of hot sauce or lemon if you like, then top with the crisp bacon." }
+  ],
+  "notes": [
+    "Freeze clams flat in portion-size bags with any juice from shucking, and thaw overnight in the fridge.",
+    "For thicker chowder, mash a few potatoes against the side of the pot before adding the dairy."
+  ]
+}

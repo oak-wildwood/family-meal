@@ -9,6 +9,16 @@
     Serves {{ r.servings }} · Prep {{ r.prepMinutes }} min · Cook {{ r.cookMinutes }} min ·
     Total {{ r.totalMinutes }} min
   </p>
+  @if (r.basedOn) {
+    <p>
+      Based on
+      @if (isUrl(r.basedOn)) {
+        <a [href]="r.basedOn">{{ r.basedOn }}</a>
+      } @else {
+        {{ r.basedOn }}
+      }
+    </p>
+  }
 
   <h2>Ingredients</h2>
   <ul>

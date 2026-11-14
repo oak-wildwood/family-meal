@@ -34,7 +34,7 @@ export interface Recipe {
   steps: Step[];
   /** Site-relative path ("/recipes/images/lentil-soup.jpg"); made absolute with SITE_ORIGIN. */
   image?: string;
-  /** Source this recipe was adapted from, emitted as `isBasedOn`. */
+  /** Where the recipe came from: a source URL, or a name ("Claude"). Emitted as `isBasedOn`. */
   basedOn?: string;
   /** Cooking notes shown on the site only. Never emitted in JSON-LD. */
   notes?: string[];
