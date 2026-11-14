@@ -1,0 +1,37 @@
+{
+  "slug": "creamy-dill-cucumber-salad",
+  "name": "Creamy Dill Cucumber Salad",
+  "description": "A cool cucumber salad in a tangy sour cream and mayo dressing with plenty of dill and lemon.",
+  "servings": 4,
+  "prepMinutes": 15,
+  "cookMinutes": 15,
+  "totalMinutes": 30,
+  "category": "Salad",
+  "tags": ["side", "salad"],
+  "basedOn": "Claude",
+  "ingredients": [
+    { "qty": 2, "item": "English cucumbers" },
+    { "qty": 1, "unit": "teaspoon", "item": "kosher salt, divided" },
+    { "qty": 0.333, "unit": "cup", "item": "sour cream" },
+    { "qty": 2, "unit": "tablespoons", "item": "mayo" },
+    { "qty": 1.5, "unit": "tablespoons", "item": "fresh lemon juice" },
+    { "qty": 1, "item": "garlic clove, grated" },
+    { "qty": 3, "unit": "tablespoons", "item": "fresh dill, chopped" },
+    { "qty": 0.333, "unit": "cup", "item": "red onion or shallot, thinly sliced" },
+    { "qty": 0.333, "unit": "teaspoon", "item": "black pepper, freshly cracked" },
+    { "qty": 1, "unit": "teaspoon", "item": "white wine vinegar (optional, for brightness)" }
+  ],
+  "steps": [
+    { "title": "Slice and salt the cucumbers", "text": "Halve the English cucumbers lengthwise and slice thinly, about 1/8 inch, on a mandoline if you have one. Toss with 1 teaspoon kosher salt in a colander set over a bowl and let sit to draw out excess water." },
+    { "title": "Make the dressing", "text": "While the cucumbers drain, whisk together the sour cream, mayo, lemon juice, garlic and black pepper in a large bowl until smooth. Add the white wine vinegar if using." },
+    { "title": "Drain and dry the cucumbers", "text": "Press the cucumbers gently to release more liquid, then pat dry with a clean towel or paper towels. This keeps the salad from getting watery." },
+    { "title": "Combine", "text": "Add the cucumbers, dill, and red onion or shallot to the dressing. Toss gently to coat." },
+    { "title": "Chill and serve", "text": "Let the salad sit in the fridge for at least 15 minutes so the flavors meld before serving.", "timerMinutes": 15 }
+  ],
+  "notes": [
+    "Salting and draining the cucumbers is the key step. Skip it and the salad turns watery fast.",
+    "Sour cream makes this richer and less tangy than a yogurt version, but it works beautifully.",
+    "For extra silkiness, swap a spoonful of crème fraîche in for the mayo.",
+    "Best eaten within a day."
+  ]
+}

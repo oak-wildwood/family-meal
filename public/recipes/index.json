@@ -1,5 +1,26 @@
 [
   {
+    "slug": "creamy-dill-cucumber-salad",
+    "name": "Creamy Dill Cucumber Salad",
+    "tags": [
+      "side",
+      "salad"
+    ],
+    "totalMinutes": 30,
+    "ingredients": [
+      "English cucumbers",
+      "kosher salt, divided",
+      "sour cream",
+      "mayo",
+      "fresh lemon juice",
+      "garlic clove, grated",
+      "fresh dill, chopped",
+      "red onion or shallot, thinly sliced",
+      "black pepper, freshly cracked",
+      "white wine vinegar (optional, for brightness)"
+    ]
+  },
+  {
     "slug": "creamy-razor-clam-chowder",
     "name": "Creamy Razor Clam Chowder",
     "tags": [
