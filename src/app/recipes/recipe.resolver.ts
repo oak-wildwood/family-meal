@@ -27,6 +27,11 @@ export const recipeResolver: ResolveFn<Recipe> = (route) => {
         jsonLd.set(toJsonLd(recipe, origin));
         title.setTitle(`${recipe.name} | Family Meal`);
         meta.updateTag({ name: 'description', content: recipe.description });
+        if (recipe.image) {
+          meta.updateTag({ property: 'og:image', content: new URL(recipe.image, origin).href });
+        } else {
+          meta.removeTag("property='og:image'");
+        }
       }),
     );
 };
