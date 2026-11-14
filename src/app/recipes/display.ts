@@ -1,4 +1,21 @@
 /** Display helpers for the visible page. Never used for JSON-LD (that's recipe-json-ld.ts). */
+import { Ingredient } from './recipe.model';
+
+export interface IngredientGroup {
+  name?: string;
+  items: Ingredient[];
+}
+
+/** Consecutive lines that share a `group` heading, in file order. */
+export function groupIngredients(ingredients: readonly Ingredient[]): IngredientGroup[] {
+  const groups: IngredientGroup[] = [];
+  for (const item of ingredients) {
+    const last = groups.at(-1);
+    if (last && last.name === item.group) last.items.push(item);
+    else groups.push({ name: item.group, items: [item] });
+  }
+  return groups;
+}
 
 /** 45 → "45 min", 60 → "1 hr", 210 → "3 hr 30 min". */
 export function formatMinutes(minutes: number): string {

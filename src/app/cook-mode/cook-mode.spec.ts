@@ -12,7 +12,10 @@ const RECIPE: Recipe = {
   cookMinutes: 10,
   totalMinutes: 15,
   tags: [],
-  ingredients: [{ item: 'water' }],
+  ingredients: [
+    { qty: 2, unit: 'cups', item: 'water' },
+    { item: 'Salt, to taste', group: 'To finish' },
+  ],
   steps: [
     { text: 'Boil the water.' },
     { title: 'Simmer', text: 'Simmer for a bit.', timerMinutes: 2 },
@@ -35,6 +38,13 @@ describe('CookMode', () => {
 
   beforeEach(async () => {
     vi.useFakeTimers();
+    // jsdom has <dialog> but not showModal/close; browsers do.
+    HTMLDialogElement.prototype.showModal ??= function (this: HTMLDialogElement) {
+      this.open = true;
+    };
+    HTMLDialogElement.prototype.close ??= function (this: HTMLDialogElement) {
+      this.open = false;
+    };
     TestBed.configureTestingModule({ imports: [CookMode], providers: [provideRouter([])] });
     fixture = TestBed.createComponent(CookMode);
     fixture.componentRef.setInput('recipe', RECIPE);
@@ -95,5 +105,29 @@ describe('CookMode', () => {
     await settle();
     expect(el.querySelector('.timer-time')!.textContent).toBe('1:50');
     expect(button('Resume')).toBeTruthy();
+  });
+
+  it('opens the ingredients over the current step and closes back to it', async () => {
+    button('Next').click();
+    await settle();
+    const sheet = el.querySelector('dialog')!;
+    expect(sheet.open).toBe(false);
+
+    button('Ingredients').click();
+    await settle();
+    expect(sheet.open).toBe(true);
+    expect(sheet.textContent).toContain('2 cups');
+    expect(sheet.textContent).toContain('water');
+    expect(sheet.querySelector('.sheet-group')!.textContent).toContain('To finish');
+
+    // Arrow keys belong to the sheet while it's open.
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+    await settle();
+    expect(el.querySelector('.counter')!.textContent).toContain('2 of 3');
+
+    el.querySelector<HTMLButtonElement>('[aria-label="Close ingredients"]')!.click();
+    await settle();
+    expect(sheet.open).toBe(false);
+    expect(el.querySelector('.counter')!.textContent).toContain('2 of 3');
   });
 });

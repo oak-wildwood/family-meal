@@ -17,6 +17,9 @@
       </svg>
     </a>
     <p class="name">{{ r.name }}</p>
+    <button type="button" class="ing-btn" aria-haspopup="dialog" (click)="openIngredients()">
+      Ingredients
+    </button>
     <p class="counter">{{ index() + 1 }} of {{ count() }}</p>
   </header>
 
@@ -67,6 +70,54 @@
       </div>
     }
   </main>
+
+  <dialog #sheet class="sheet" aria-labelledby="sheet-heading" (click)="onSheetClick($event)">
+    <div class="sheet-inner">
+      <div class="sheet-head">
+        <h2 id="sheet-heading" class="sheet-title">Ingredients</h2>
+        <button
+          type="button"
+          class="iconbtn"
+          aria-label="Close ingredients"
+          (click)="closeIngredients()"
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+      <div class="sheet-body">
+        @for (g of groups(); track $index) {
+          @if (g.name) {
+            <h3 class="sheet-group">{{ g.name }}</h3>
+          }
+          <ul class="sheet-list">
+            @for (i of g.items; track $index) {
+              <li>
+                @if (i.qty !== undefined) {
+                  <span class="qty"
+                    >{{ formatQuantity(i.qty) }}{{ i.unit ? ' ' + i.unit : '' }}</span
+                  >
+                } @else if (i.unit) {
+                  <span class="qty">{{ i.unit }}</span>
+                }
+                {{ i.item }}
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+  </dialog>
 
   <footer class="foot">
     @if (screenStaysOn()) {
