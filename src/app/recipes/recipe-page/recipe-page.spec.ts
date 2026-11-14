@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { SITE_ORIGIN } from '../../site-origin';
 import { Recipe } from '../recipe.model';
 import { RecipePage } from './recipe-page';
 
@@ -26,7 +27,10 @@ describe('RecipePage', () => {
   let el: HTMLElement;
 
   beforeEach(async () => {
-    TestBed.configureTestingModule({ imports: [RecipePage], providers: [provideRouter([])] });
+    TestBed.configureTestingModule({
+      imports: [RecipePage],
+      providers: [provideRouter([]), { provide: SITE_ORIGIN, useValue: 'https://example.test' }],
+    });
     fixture = TestBed.createComponent(RecipePage);
     fixture.componentRef.setInput('recipe', RECIPE);
     el = fixture.nativeElement;
@@ -57,5 +61,43 @@ describe('RecipePage', () => {
   it('links Start cooking to cook mode and shows step timers', () => {
     expect(el.querySelector('a.start')!.getAttribute('href')).toBe('/recipes/test-salad/cook');
     expect(el.querySelector('.timer-hint')!.textContent).toContain('2 min');
+  });
+
+  describe('Share', () => {
+    const shareButton = () => el.querySelector<HTMLButtonElement>('button.share')!;
+    const settle = async () => {
+      await fixture.whenStable();
+      fixture.detectChanges();
+    };
+
+    afterEach(() => vi.unstubAllGlobals());
+
+    it('opens the share sheet with the public URL', async () => {
+      const share = vi.fn().mockResolvedValue(undefined);
+      vi.stubGlobal('navigator', { share });
+      shareButton().click();
+      await settle();
+      expect(share).toHaveBeenCalledWith({
+        title: 'Test Salad',
+        url: 'https://example.test/recipes/test-salad',
+      });
+    });
+
+    it('ignores a closed share sheet', async () => {
+      const share = vi.fn().mockRejectedValue(new DOMException('', 'AbortError'));
+      vi.stubGlobal('navigator', { share });
+      shareButton().click();
+      await settle();
+      expect(shareButton().textContent).toContain('Share');
+    });
+
+    it('copies the link where there is no share sheet', async () => {
+      const writeText = vi.fn().mockResolvedValue(undefined);
+      vi.stubGlobal('navigator', { clipboard: { writeText } });
+      shareButton().click();
+      await settle();
+      expect(writeText).toHaveBeenCalledWith('https://example.test/recipes/test-salad');
+      expect(shareButton().textContent).toContain('Link copied');
+    });
   });
 });

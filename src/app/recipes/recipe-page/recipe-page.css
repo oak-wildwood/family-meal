@@ -129,8 +129,18 @@ dd {
   font-weight: 700;
 }
 
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
 .start {
-  width: 100%;
+  flex: 1;
+}
+
+.share {
+  flex: none;
+  padding: 0 20px;
 }
 
 .body,
@@ -260,8 +270,7 @@ dd {
     justify-content: flex-start;
   }
 
-  .start {
-    width: auto;
+  .actions {
     margin-left: auto;
   }
 
