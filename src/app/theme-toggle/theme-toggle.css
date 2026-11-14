@@ -1,0 +1,25 @@
+/* Fixed top right on every page. Pages keep their right-hand content clear of it. */
+:host {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  z-index: 10;
+}
+
+.toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--chip);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.toggle svg {
+  width: 22px;
+  height: 22px;
+}

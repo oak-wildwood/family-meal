@@ -15,6 +15,8 @@
   align-items: center;
   gap: 12px;
   padding-bottom: 12px;
+  /* Room for the theme toggle, fixed at the top right. */
+  padding-right: 56px;
 }
 
 .name,
