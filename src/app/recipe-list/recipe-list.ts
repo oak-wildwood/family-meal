@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { Router, RouterLink } from '@angular/router';
+import { Logo } from '../logo/logo';
 import { formatMinutes, tagLabel } from '../recipes/display';
 import { RecipeSummary } from '../recipes/recipe.model';
 
@@ -11,7 +12,7 @@ import { RecipeSummary } from '../recipes/recipe.model';
  */
 @Component({
   selector: 'app-recipe-list',
-  imports: [RouterLink],
+  imports: [RouterLink, Logo],
   templateUrl: './recipe-list.html',
   styleUrl: './recipe-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

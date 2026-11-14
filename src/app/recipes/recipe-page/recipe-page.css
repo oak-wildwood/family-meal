@@ -203,6 +203,9 @@ dd {
 @media (min-width: 960px) {
   .wordmark {
     display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
   }
 
   article {

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Logo } from '../../logo/logo';
 import { formatMinutes, sourceHost, tagLabel } from '../display';
 import { formatQuantity, isUrl } from '../recipe-json-ld';
 import { Ingredient, Recipe } from '../recipe.model';
@@ -17,7 +18,7 @@ interface IngredientGroup {
  */
 @Component({
   selector: 'app-recipe-page',
-  imports: [RouterLink],
+  imports: [RouterLink, Logo],
   templateUrl: './recipe-page.html',
   styleUrl: './recipe-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
