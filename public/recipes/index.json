@@ -1,5 +1,29 @@
 [
   {
+    "slug": "avgolemono-lobster-mushroom-soup",
+    "name": "Avgolemono (Greek Lemon Rice Soup) with Lobster Mushroom",
+    "tags": [
+      "soup",
+      "mushroom"
+    ],
+    "totalMinutes": 45,
+    "ingredients": [
+      "lobster mushroom, cleaned and diced small",
+      "olive oil",
+      "butter",
+      "small yellow onion, finely diced",
+      "medium carrot, finely diced",
+      "garlic cloves, minced",
+      "arborio rice",
+      "stock, warm (seafood, chicken, or vegetable)",
+      "large eggs, room temperature",
+      "lemon, zested and juiced",
+      "fresh dill or parsley, chopped",
+      "kosher salt, to taste",
+      "black pepper"
+    ]
+  },
+  {
     "slug": "chanterelle-cream-linguine",
     "name": "Chanterelle Cream Linguine",
     "tags": [
