@@ -1,4 +1,5 @@
-import seed from '../../../public/recipes/spike-test-lentil-soup.json';
+// The spike recipe (issue #1). No longer published; kept as the fixture AnyList's import was verified against.
+import seed from './spike-recipe.fixture.json';
 import { Recipe } from './recipe.model';
 import { formatIngredient, formatQuantity, isoDuration, serializeJsonLd, toJsonLd } from './recipe-json-ld';
 

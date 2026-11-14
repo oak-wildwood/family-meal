@@ -22,27 +22,5 @@
       "chopped razor clams, thawed with their juice",
       "black pepper"
     ]
-  },
-  {
-    "slug": "spike-test-lentil-soup",
-    "name": "Spike Test Lentil Soup",
-    "tags": [
-      "soup",
-      "vegetarian"
-    ],
-    "totalMinutes": 50,
-    "ingredients": [
-      "olive oil",
-      "yellow onion, diced",
-      "carrots, peeled and diced",
-      "garlic, minced",
-      "ground cumin",
-      "brown lentils, rinsed",
-      "vegetable broth",
-      "diced tomatoes",
-      "baby spinach",
-      "lemon juice",
-      "Salt and black pepper, to taste"
-    ]
   }
 ]
