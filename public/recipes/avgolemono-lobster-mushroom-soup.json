@@ -1,0 +1,40 @@
+{
+  "slug": "avgolemono-lobster-mushroom-soup",
+  "name": "Avgolemono (Greek Lemon Rice Soup) with Lobster Mushroom",
+  "description": "Silky egg-lemon broth with tender arborio rice and seared lobster mushroom.",
+  "servings": 2,
+  "prepMinutes": 15,
+  "cookMinutes": 30,
+  "totalMinutes": 45,
+  "category": "Soup",
+  "tags": ["soup", "mushroom"],
+  "basedOn": "Claude",
+  "ingredients": [
+    { "qty": 8, "unit": "ounces", "item": "lobster mushroom, cleaned and diced small" },
+    { "qty": 1, "unit": "tablespoon", "item": "olive oil" },
+    { "qty": 1, "unit": "tablespoon", "item": "butter" },
+    { "qty": 0.5, "item": "small yellow onion, finely diced" },
+    { "qty": 1, "item": "medium carrot, finely diced" },
+    { "qty": 2, "item": "garlic cloves, minced" },
+    { "qty": 0.333, "unit": "cup", "item": "arborio rice" },
+    { "qty": 4, "unit": "cups", "item": "stock, warm (seafood, chicken, or vegetable)" },
+    { "qty": 2, "item": "large eggs, room temperature" },
+    { "qty": 1, "item": "lemon, zested and juiced" },
+    { "qty": 2, "unit": "tablespoons", "item": "fresh dill or parsley, chopped" },
+    { "qty": 0.5, "unit": "teaspoon", "item": "kosher salt, to taste" },
+    { "qty": 0.333, "unit": "teaspoon", "item": "black pepper" }
+  ],
+  "steps": [
+    { "title": "Sear the mushroom", "text": "Heat a wide pot over medium-high. Add the lobster mushroom with no fat and cook, stirring, until its liquid releases and cooks off. Add the olive oil and brown for another 3 minutes. Remove half to a plate for topping.", "timerMinutes": 8 },
+    { "title": "Soften the aromatics", "text": "Lower the heat to medium. Add the butter, onion and carrot and cook until soft but not browned. Stir in the garlic for 30 seconds.", "timerMinutes": 4 },
+    { "title": "Simmer the rice", "text": "Add the arborio rice and the warm stock. Bring to a boil, then reduce to a gentle simmer and cook until the rice is tender and the broth has some body, stirring occasionally." },
+    { "title": "Temper the eggs", "text": "Take the pot off the heat and let it stop bubbling for a minute. Whisk the eggs in a bowl until frothy, then whisk in the lemon juice. Slowly ladle in about 1 cup of hot broth while whisking constantly so the eggs don't scramble." },
+    { "title": "Finish the soup", "text": "Stir the egg mixture back into the pot off the heat and stir for 2 minutes until silky and slightly thickened. Do not boil. Add the lemon zest, the dill or parsley, the salt and the black pepper, then taste and adjust the lemon and salt.", "timerMinutes": 2 },
+    { "title": "Serve", "text": "Ladle into bowls and top with the reserved seared mushroom, extra dill, black pepper and a drizzle of olive oil. Crusty bread is ideal." }
+  ],
+  "notes": [
+    "Never let the soup boil after adding the egg mixture, or it will curdle.",
+    "It thickens as it sits, so thin leftovers with a splash of warm stock and reheat gently over low heat.",
+    "Seafood stock brings out the mushroom's seafood-like flavor."
+  ]
+}
