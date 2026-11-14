@@ -3,15 +3,16 @@
   "framework": "angular",
   "buildCommand": "ng build",
   "outputDirectory": "dist/family-meal/browser",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "**": false
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
-        }
-      ]
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
   ]
 }
