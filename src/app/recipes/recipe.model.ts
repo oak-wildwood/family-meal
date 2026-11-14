@@ -1,0 +1,48 @@
+/** One ingredient line. `qty` is a plain number (0.5, not "1/2"); formatting happens in toJsonLd. */
+export interface Ingredient {
+  /** Omitted for lines like "Salt and black pepper, to taste". */
+  qty?: number;
+  /** "tablespoon", "cups", "can (14 oz)". Omitted for countable items ("1 yellow onion"). */
+  unit?: string;
+  /** Everything after the unit, prep notes included: "brown lentils, rinsed". */
+  item: string;
+  /** Optional heading the line sits under on the page ("For the dressing"). Not in JSON-LD. */
+  group?: string;
+}
+
+export interface Step {
+  text: string;
+  /** Short label shown on the page; emitted as the HowToStep `name` when present. */
+  title?: string;
+  /** Lets the page offer a timer for this step. Not in JSON-LD. */
+  timerMinutes?: number;
+}
+
+/** The single source for both the visible page and the JSON-LD. */
+export interface Recipe {
+  /** Permanent once deployed: it is the URL. */
+  slug: string;
+  name: string;
+  description: string;
+  servings: number;
+  prepMinutes: number;
+  cookMinutes: number;
+  totalMinutes: number;
+  category?: string;
+  tags: string[];
+  ingredients: Ingredient[];
+  steps: Step[];
+  /** Site-relative path ("/recipes/images/lentil-soup.jpg"); made absolute with SITE_ORIGIN. */
+  image?: string;
+  /** Source this recipe was adapted from, emitted as `isBasedOn`. */
+  basedOn?: string;
+  /** Cooking notes shown on the site only. Never emitted in JSON-LD. */
+  notes?: string[];
+}
+
+/** One row of public/recipes/index.json. */
+export interface RecipeSummary {
+  slug: string;
+  name: string;
+  tags: string[];
+}

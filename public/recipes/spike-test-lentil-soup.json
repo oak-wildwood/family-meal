@@ -1,0 +1,30 @@
+{
+  "slug": "spike-test-lentil-soup",
+  "name": "Spike Test Lentil Soup",
+  "description": "A simple lentil soup, used only to test recipe import.",
+  "servings": 4,
+  "prepMinutes": 15,
+  "cookMinutes": 35,
+  "totalMinutes": 50,
+  "category": "Soup",
+  "tags": ["soup", "vegetarian"],
+  "ingredients": [
+    { "qty": 1, "unit": "tablespoon", "item": "olive oil" },
+    { "qty": 1, "item": "yellow onion, diced" },
+    { "qty": 2, "item": "carrots, peeled and diced" },
+    { "qty": 3, "unit": "cloves", "item": "garlic, minced" },
+    { "qty": 1, "unit": "teaspoon", "item": "ground cumin" },
+    { "qty": 1.5, "unit": "cups", "item": "brown lentils, rinsed" },
+    { "qty": 6, "unit": "cups", "item": "vegetable broth" },
+    { "qty": 1, "unit": "can (14 oz)", "item": "diced tomatoes" },
+    { "qty": 2, "unit": "cups", "item": "baby spinach" },
+    { "qty": 1, "unit": "tablespoon", "item": "lemon juice" },
+    { "item": "Salt and black pepper, to taste" }
+  ],
+  "steps": [
+    { "text": "Heat the olive oil in a large pot over medium heat. Cook the onion and carrots for 6 to 8 minutes, until soft.", "timerMinutes": 8 },
+    { "text": "Stir in the garlic and cumin and cook for 1 minute, until fragrant.", "timerMinutes": 1 },
+    { "text": "Add the lentils, broth, and tomatoes. Bring to a boil, then reduce the heat and simmer for 25 to 30 minutes, until the lentils are tender.", "timerMinutes": 30 },
+    { "text": "Stir in the spinach until wilted. Add the lemon juice, then season with salt and pepper." }
+  ]
+}

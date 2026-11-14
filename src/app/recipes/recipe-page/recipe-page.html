@@ -1,0 +1,30 @@
+@let r = recipe();
+<article>
+  <h1>{{ r.name }}</h1>
+  <p>{{ r.description }}</p>
+  <p>
+    Serves {{ r.servings }} · Prep {{ r.prepMinutes }} min · Cook {{ r.cookMinutes }} min ·
+    Total {{ r.totalMinutes }} min
+  </p>
+
+  <h2>Ingredients</h2>
+  <ul>
+    @for (ingredient of r.ingredients; track $index) {
+      <li>{{ formatIngredient(ingredient) }}</li>
+    }
+  </ul>
+
+  <h2>Steps</h2>
+  <ol>
+    @for (step of r.steps; track $index) {
+      <li>{{ step.text }}</li>
+    }
+  </ol>
+
+  @if (r.notes?.length) {
+    <h2>Notes</h2>
+    @for (note of r.notes; track $index) {
+      <p>{{ note }}</p>
+    }
+  }
+</article>
