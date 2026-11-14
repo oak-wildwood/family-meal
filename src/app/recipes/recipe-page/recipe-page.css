@@ -16,6 +16,8 @@
   align-items: center;
   justify-content: space-between;
   padding-top: max(12px, env(safe-area-inset-top));
+  /* Room for the theme toggle, fixed at the top right. */
+  padding-right: 56px;
   margin-left: -4px;
 }
 
