@@ -44,9 +44,11 @@ wire, explain and review.
   the classes (`.stepper`, `.check`, `.box`, `.num`, `aria-pressed` states) live in
   `src/styles.css`, and `recipe-page.html` marks the `SLOT(Oak)` each one replaces. Home
   (`recipe-list`) and cook mode (`cook-mode`) are not practice shells; agents may change them.
-- **Never comment `@claude` or `@flytrap`, and never edit `.github/workflows/`.** Each run
-  spends Oak's Claude usage. Workflow changes happen in local sessions with Oak; the shared
-  workflows live in `oak-wildwood/gh-repo-init`.
+- **Never comment `@claude`, and never edit `.github/workflows/`.** Each run spends Oak's
+  Claude usage. Workflow changes happen in local sessions with Oak; the shared workflows live in
+  `oak-wildwood/gh-repo-init`.
+- **Comment `@flytrap` on a PR when Oak asks for a Flytrap review**, then report its findings
+  to Oak. It spends Oak's Claude usage too, so don't request one unprompted.
 
 ## Invariants that are easy to break by accident
 
