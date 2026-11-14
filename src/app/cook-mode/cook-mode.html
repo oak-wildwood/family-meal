@@ -1,0 +1,114 @@
+@let r = recipe();
+@let s = step();
+<div class="cook">
+  <header class="bar">
+    <a class="iconbtn" [routerLink]="['/recipes', r.slug]" aria-label="Exit cook mode">
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <path d="M6 6l12 12M18 6 6 18" />
+      </svg>
+    </a>
+    <p class="name">{{ r.name }}</p>
+    <p class="counter">{{ index() + 1 }} of {{ count() }}</p>
+  </header>
+
+  <div class="segs" aria-hidden="true">
+    @for (x of r.steps; track $index) {
+      <span class="seg" [class.on]="$index <= index()"></span>
+    }
+  </div>
+
+  @if (otherTimers().length) {
+    <ul class="others" aria-label="Other timers">
+      @for (o of otherTimers(); track o.step) {
+        <li>
+          <button
+            type="button"
+            class="other"
+            [class.done]="o.status === 'done'"
+            (click)="go(o.step)"
+          >
+            <span class="other-name">{{ o.name }}</span>
+            <span class="other-clock">{{ o.status === 'done' ? "Time's up" : o.clock }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+
+  <main class="main">
+    <div class="step-copy" aria-live="polite">
+      <p class="label">Step {{ index() + 1 }}{{ s.title ? ' · ' + s.title : '' }}</p>
+      <p class="text">{{ s.text }}</p>
+    </div>
+
+    @if (timer(); as t) {
+      <div class="timer" [class.done]="t.status === 'done'">
+        <div class="timer-read">
+          <span class="timer-name">{{ t.status === 'done' ? "Time's up" : t.name }}</span>
+          <span class="timer-time" role="timer">{{ t.clock }}</span>
+        </div>
+        <div class="timer-actions">
+          <button type="button" class="btn btn-primary" (click)="toggleTimer()">
+            {{ t.label }}
+          </button>
+          @if (t.status !== 'idle') {
+            <button type="button" class="btn btn-ghost reset" (click)="resetTimer()">Reset</button>
+          }
+        </div>
+      </div>
+    }
+  </main>
+
+  <footer class="foot">
+    @if (screenStaysOn()) {
+      <p class="hint">Screen stays on while you cook</p>
+    }
+    <div class="nav">
+      <button type="button" class="btn btn-ghost" (click)="go(index() - 1)" [disabled]="atFirst()">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+        Back
+      </button>
+      @if (atLast()) {
+        <a class="btn btn-primary" [routerLink]="['/recipes', r.slug]">Finish</a>
+      } @else {
+        <button type="button" class="btn btn-primary" (click)="go(index() + 1)">
+          Next
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      }
+    </div>
+  </footer>
+</div>

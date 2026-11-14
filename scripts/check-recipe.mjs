@@ -49,6 +49,8 @@ for (const key of ['prepTime', 'cookTime', 'totalTime']) {
 }
 check(/<meta name="robots" content="noindex"/.test(html), 'noindex meta missing');
 
+check(existsSync(`${DIST}/recipes/${slug}/cook/index.html`), 'cook mode page was not prerendered');
+
 if (recipe.image) {
   check(/^https:\/\//.test(ld.image ?? ''), `image is ${ld.image}, not an absolute https URL`);
   check(existsSync(`${DIST}${recipe.image}`), `${recipe.image} is not in the build output`);

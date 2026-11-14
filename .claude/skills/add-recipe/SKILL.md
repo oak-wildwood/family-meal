@@ -78,8 +78,9 @@ Done when the strip step has run on the exact file you will commit.
 
 ## 4. Add the manifest row
 
-Append `{ "slug", "name", "tags" }` to `public/recipes/index.json`, copied from the recipe file.
-A recipe missing from the manifest is never prerendered and its URL 404s.
+Run `npm run recipe:index`, which regenerates `public/recipes/index.json` from the recipe files
+(Home reads its names, tags, times and ingredient names). Never edit the manifest by hand. A recipe
+missing from the manifest is never prerendered and its URL 404s.
 
 ## 5. Verify the built page
 
