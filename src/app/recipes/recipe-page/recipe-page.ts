@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { formatMinutes, sourceHost, tagLabel } from '../display';
-import { formatIngredient, formatQuantity, isUrl } from '../recipe-json-ld';
+import { formatQuantity, isUrl } from '../recipe-json-ld';
 import { Ingredient, Recipe } from '../recipe.model';
 
 interface IngredientGroup {
@@ -37,7 +37,8 @@ export class RecipePage {
     return groups;
   });
 
-  protected readonly formatIngredient = formatIngredient;
+  // The template splits each line the way formatIngredient orders it (quantity,
+  // unit, item) so the quantity can be bold; the JSON-LD still uses formatIngredient.
   protected readonly formatQuantity = formatQuantity;
   protected readonly formatMinutes = formatMinutes;
   protected readonly tagLabel = tagLabel;

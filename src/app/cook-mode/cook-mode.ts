@@ -64,9 +64,11 @@ export class CookMode {
   private interval?: ReturnType<typeof setInterval>;
   private audio?: AudioContext;
   private wakeLock?: WakeLockSentinel;
+  private destroyed = false;
 
   constructor() {
     const destroyRef = inject(DestroyRef);
+    destroyRef.onDestroy(() => (this.destroyed = true));
     afterNextRender(() => {
       void this.requestWakeLock();
       const onVisible = () => {
@@ -181,7 +183,13 @@ export class CookMode {
   private async requestWakeLock(): Promise<void> {
     if (!('wakeLock' in navigator) || this.document.visibilityState !== 'visible') return;
     try {
-      this.wakeLock = await navigator.wakeLock.request('screen');
+      const lock = await navigator.wakeLock.request('screen');
+      // Granted after the user left cook mode: don't keep the screen on elsewhere.
+      if (this.destroyed) {
+        void lock.release();
+        return;
+      }
+      this.wakeLock = lock;
       this.screenStaysOn.set(true);
       this.wakeLock.addEventListener('release', () => this.screenStaysOn.set(false));
     } catch {

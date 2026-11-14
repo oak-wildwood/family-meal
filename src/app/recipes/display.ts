@@ -22,7 +22,11 @@ export function tagLabel(tag: string): string {
   return tag.charAt(0).toUpperCase() + tag.slice(1);
 }
 
-/** "https://www.example.com/soup" → "example.com". */
+/** "https://www.example.com/soup" → "example.com". A malformed URL comes back as is rather than failing the prerender. */
 export function sourceHost(url: string): string {
-  return new URL(url).hostname.replace(/^www\./, '');
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
 }

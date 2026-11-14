@@ -35,4 +35,8 @@ describe('sourceHost', () => {
   it('drops the scheme, path and www', () => {
     expect(sourceHost('https://www.example.com/soup?x=1')).toBe('example.com');
   });
+
+  it('returns a malformed URL unchanged instead of throwing', () => {
+    expect(sourceHost('https://exa mple.com')).toBe('https://exa mple.com');
+  });
 });
