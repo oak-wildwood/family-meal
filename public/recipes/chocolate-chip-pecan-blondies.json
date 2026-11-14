@@ -1,0 +1,36 @@
+{
+  "slug": "chocolate-chip-pecan-blondies",
+  "name": "Chocolate Chip Pecan Blondies",
+  "description": "Chewy, buttery blondies with toasted pecans and chocolate chips, baked in a 9x12 pan.",
+  "servings": 12,
+  "prepMinutes": 15,
+  "cookMinutes": 27,
+  "totalMinutes": 42,
+  "category": "Dessert",
+  "tags": ["dessert", "baking"],
+  "basedOn": "Claude",
+  "ingredients": [
+    { "qty": 0.75, "unit": "cup", "item": "butter, melted" },
+    { "qty": 1.5, "unit": "cups", "item": "brown sugar, packed" },
+    { "qty": 2, "item": "large eggs" },
+    { "qty": 2, "unit": "teaspoons", "item": "vanilla extract" },
+    { "qty": 1.75, "unit": "cups", "item": "all-purpose flour" },
+    { "qty": 1.5, "unit": "teaspoons", "item": "baking powder" },
+    { "qty": 0.5, "unit": "teaspoon", "item": "salt" },
+    { "qty": 1, "unit": "cup", "item": "chocolate chips" },
+    { "qty": 1, "unit": "cup", "item": "pecans, chopped" }
+  ],
+  "steps": [
+    { "title": "Prep pan and toast nuts", "text": "Heat the oven to 350°F. Line a 9x12x2 pan with parchment, leaving an overhang on two sides. Spread the pecans on a sheet pan and toast while the oven heats." },
+    { "title": "Mix the wet ingredients", "text": "Whisk the melted butter and brown sugar until smooth. Whisk in the eggs and vanilla." },
+    { "title": "Fold in dry ingredients", "text": "Add the flour, baking powder and salt and fold until just combined. Fold in the chocolate chips and the toasted pecans." },
+    { "title": "Bake", "text": "Spread the batter evenly in the pan. Bake until the edges are set and golden and the center is just barely firm. A toothpick should come out with moist crumbs, not wet batter.", "timerMinutes": 27 },
+    { "title": "Cool completely", "text": "Cool in the pan, then lift out by the parchment and cut into squares. Cutting too early makes them gummy." }
+  ],
+  "notes": [
+    "Bake 25 to 30 minutes. Add 2 to 3 minutes if your oven runs cool or the pan is full to the top.",
+    "If you only have white sugar, use 1 1/2 cups white sugar plus 1 to 2 tablespoons molasses, honey or maple syrup for chew and caramel flavor. Without it they come out lighter and slightly crisper.",
+    "Walnuts work in place of pecans. They're a bit more bitter, which is nice against the chocolate.",
+    "Keeps 3 to 4 days covered at room temperature, and freezes well wrapped in individual squares."
+  ]
+}

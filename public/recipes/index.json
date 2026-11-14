@@ -24,6 +24,51 @@
     ]
   },
   {
+    "slug": "chanterelle-cream-linguine",
+    "name": "Chanterelle Cream Linguine",
+    "tags": [
+      "pasta",
+      "mushroom"
+    ],
+    "totalMinutes": 30,
+    "ingredients": [
+      "linguine",
+      "fresh chanterelles, brushed clean and torn into strips",
+      "butter, divided",
+      "olive oil",
+      "large shallot, finely diced",
+      "garlic cloves, minced",
+      "fresh thyme leaves",
+      "medium lemon, zested",
+      "dry white wine",
+      "heavy cream",
+      "parmesan, finely grated",
+      "flat-leaf parsley, chopped",
+      "kosher salt for pasta water",
+      "black pepper"
+    ]
+  },
+  {
+    "slug": "chocolate-chip-pecan-blondies",
+    "name": "Chocolate Chip Pecan Blondies",
+    "tags": [
+      "dessert",
+      "baking"
+    ],
+    "totalMinutes": 42,
+    "ingredients": [
+      "butter, melted",
+      "brown sugar, packed",
+      "large eggs",
+      "vanilla extract",
+      "all-purpose flour",
+      "baking powder",
+      "salt",
+      "chocolate chips",
+      "pecans, chopped"
+    ]
+  },
+  {
     "slug": "creamy-razor-clam-chowder",
     "name": "Creamy Razor Clam Chowder",
     "tags": [

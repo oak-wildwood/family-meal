@@ -1,0 +1,41 @@
+{
+  "slug": "chanterelle-cream-linguine",
+  "name": "Chanterelle Cream Linguine",
+  "description": "Golden chanterelles and shallot in a silky parmesan cream sauce over linguine.",
+  "servings": 2,
+  "prepMinutes": 10,
+  "cookMinutes": 20,
+  "totalMinutes": 30,
+  "category": "Pasta",
+  "tags": ["pasta", "mushroom"],
+  "basedOn": "Claude",
+  "ingredients": [
+    { "qty": 8, "unit": "ounces", "item": "linguine" },
+    { "qty": 8, "unit": "ounces", "item": "fresh chanterelles, brushed clean and torn into strips" },
+    { "qty": 2, "unit": "tablespoons", "item": "butter, divided" },
+    { "qty": 1, "unit": "tablespoon", "item": "olive oil" },
+    { "qty": 1, "item": "large shallot, finely diced" },
+    { "qty": 2, "item": "garlic cloves, minced" },
+    { "qty": 1, "unit": "teaspoon", "item": "fresh thyme leaves" },
+    { "qty": 0.5, "item": "medium lemon, zested" },
+    { "qty": 0.333, "unit": "cup", "item": "dry white wine" },
+    { "qty": 0.75, "unit": "cup", "item": "heavy cream" },
+    { "qty": 2, "unit": "ounces", "item": "parmesan, finely grated" },
+    { "qty": 2, "unit": "tablespoons", "item": "flat-leaf parsley, chopped" },
+    { "qty": 1, "unit": "tablespoon", "item": "kosher salt for pasta water" },
+    { "qty": 0.333, "unit": "teaspoon", "item": "black pepper" }
+  ],
+  "steps": [
+    { "title": "Dry-sauté the chanterelles", "text": "Heat a large wide skillet over medium-high with no fat. Add the chanterelles in a single layer, working in batches if the pan is crowded, and cook until they release their liquid and it evaporates. Don't salt yet." },
+    { "title": "Brown in butter", "text": "Add 1 tablespoon of the butter and the olive oil. Sauté until the mushrooms are golden at the edges, then scoop them into a bowl." },
+    { "title": "Start the pasta water", "text": "Meanwhile, boil a big pot of water with the kosher salt. Cook the linguine 1 minute short of the package time, then save a cup of pasta water before draining.", "timerMinutes": 10 },
+    { "title": "Build the sauce base", "text": "Lower the skillet to medium and melt the remaining tablespoon of butter. Add the shallot and lemon zest and cook until soft, then add the garlic and thyme for 30 seconds.", "timerMinutes": 3 },
+    { "title": "Deglaze and reduce", "text": "Pour in the white wine and scrape up the browned bits. Simmer until nearly gone, then stir in the heavy cream and simmer gently until slightly thickened." },
+    { "title": "Finish the pasta in the sauce", "text": "Add the drained linguine, the mushrooms, and the parmesan. Toss over low heat, adding pasta water a splash at a time until glossy and clingy. Season with the black pepper and taste before adding any salt, since the parmesan is salty. Top with the parsley." }
+  ],
+  "notes": [
+    "Chanterelles hold a lot of water, so the dry-sauté step is what gives you good flavor and texture instead of steamed mushrooms. Brush them clean rather than soaking.",
+    "For a bit of heat, add a splash of Worcestershire with the wine and finish with a pinch of cayenne.",
+    "To add protein, toss in seared shrimp or crisp bacon at the end. A squeeze of lemon at the table brightens the cream."
+  ]
+}
