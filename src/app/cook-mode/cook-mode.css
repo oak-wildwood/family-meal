@@ -1,0 +1,206 @@
+/* Fills the visible screen (dvh tracks the mobile toolbar), Back/Next pinned within thumb reach. */
+.cook {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) 0
+    max(20px, env(safe-area-inset-left));
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+}
+
+.name,
+.counter,
+.hint {
+  margin: 0;
+  font-size: 16px;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.counter {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.segs {
+  display: flex;
+  gap: 4px;
+  padding-top: 4px;
+}
+
+.seg {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--line);
+}
+
+.seg.on {
+  background: var(--accent);
+}
+
+.others {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.other {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  cursor: pointer;
+  text-align: left;
+}
+
+.other.done {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.other-clock {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 32px 4px 24px;
+}
+
+.step-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Readable at arm's length. */
+.text {
+  margin: 0;
+  font-size: clamp(26px, 7.5vw, 34px);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.timer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--surface);
+}
+
+.timer.done {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.timer-read {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.timer-name {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.timer.done .timer-name {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.timer-time {
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.reset {
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.foot {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0 max(20px, env(safe-area-inset-bottom));
+  background: var(--bg);
+}
+
+.hint {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.nav .btn {
+  min-height: 64px;
+  padding: 0 16px;
+  border-radius: 16px;
+  font-size: 19px;
+}

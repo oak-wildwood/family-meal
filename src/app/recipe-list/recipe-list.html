@@ -1,1 +1,80 @@
-<p>recipe-list works!</p>
+<div class="page">
+  <header class="top">
+    <h1 class="h wordmark">Family Meal</h1>
+  </header>
+
+  <div class="search">
+    <label for="search" class="sr-only">Search recipes</label>
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </svg>
+    <input
+      #search
+      id="search"
+      type="search"
+      placeholder="Search recipes or ingredients"
+      autocomplete="off"
+      enterkeyhint="search"
+      [value]="query()"
+      (input)="query.set(search.value)"
+    />
+  </div>
+</div>
+
+@if (tags().length) {
+  <nav class="chips" aria-label="Filter by tag">
+    <a class="chip" routerLink="/" [attr.aria-current]="selectedTag() ? null : 'page'">All</a>
+    @for (t of tags(); track t) {
+      <a
+        class="chip"
+        routerLink="/"
+        [queryParams]="{ tag: t }"
+        [attr.aria-current]="selectedTag() === t ? 'page' : null"
+        >{{ tagLabel(t) }}</a
+      >
+    }
+  </nav>
+}
+
+<main class="page">
+  @if (recipes.error()) {
+    <p class="muted">The recipe list didn't load. Check your connection and refresh.</p>
+  } @else if (recipes.hasValue()) {
+    <p class="count" aria-live="polite">{{ countLabel() }}</p>
+    <ul class="rows">
+      @for (r of visible(); track r.slug) {
+        <li>
+          <a class="row" [routerLink]="['/recipes', r.slug]">
+            <span class="row-top">
+              <span class="row-name">{{ r.name }}</span>
+              <span class="row-time">{{ formatMinutes(r.totalMinutes) }}</span>
+            </span>
+            <span class="row-tags">
+              @for (t of r.tags; track t; let last = $last) {
+                {{ tagLabel(t) }}{{ last ? '' : ' · ' }}
+              }
+            </span>
+          </a>
+        </li>
+      }
+    </ul>
+    @if (!visible().length) {
+      <div class="empty">
+        <p class="muted">Nothing matches that yet.</p>
+        <button type="button" class="btn btn-ghost" (click)="clear()">
+          Clear search and filters
+        </button>
+      </div>
+    }
+  }
+</main>

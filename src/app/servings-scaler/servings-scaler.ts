@@ -9,6 +9,8 @@ import { Component } from '@angular/core';
  * - Derive the scaled ingredient lines with `computed()`; reuse formatQuantity /
  *   formatIngredient from recipes/recipe-json-ld.ts so 0.5 still shows as 1/2.
  * - Only the visible list scales. The JSON-LD always uses the base servings.
+ * - Markup and styles are ready: the `.stepper` classes in src/styles.css match the
+ *   canvas, and recipe-page.html marks the SLOT(Oak) this replaces. Clamp to 1–12.
  */
 @Component({
   selector: 'app-servings-scaler',

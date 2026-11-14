@@ -1,43 +1,178 @@
 @let r = recipe();
-<article>
-  <h1>{{ r.name }}</h1>
+<nav class="wrap topbar" aria-label="Site">
+  <a class="backlink" routerLink="/">
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m15 18-6-6 6-6" />
+    </svg>
+    All recipes
+  </a>
+  <a class="wordmark h" routerLink="/">Family Meal</a>
+</nav>
+
+<article class="wrap">
+  <!--
+    Story and photo slot. The page is a plain vertical stack with fixed gaps, so a
+    future story section drops in here and pushes the recipe down.
+  -->
   @if (r.image) {
-    <img [src]="r.image" [alt]="r.name" width="1200" height="900" />
+    <img class="photo" [src]="r.image" [alt]="r.name" width="1200" height="900" />
   }
-  <p>{{ r.description }}</p>
-  <p>
-    Serves {{ r.servings }} · Prep {{ r.prepMinutes }} min · Cook {{ r.cookMinutes }} min ·
-    Total {{ r.totalMinutes }} min
-  </p>
-  @if (r.basedOn) {
-    <p>
-      Based on
-      @if (isUrl(r.basedOn)) {
-        <a [href]="r.basedOn">{{ r.basedOn }}</a>
-      } @else {
-        {{ r.basedOn }}
+
+  <header class="intro">
+    <div class="title">
+      <h1 class="h">{{ r.name }}</h1>
+      <p class="lede">{{ r.description }}</p>
+    </div>
+
+    @if (r.tags.length) {
+      <ul class="tags" aria-label="Tags">
+        @for (t of r.tags; track t) {
+          <li>
+            <a class="chip" routerLink="/" [queryParams]="{ tag: t }">{{ tagLabel(t) }}</a>
+          </li>
+        }
+      </ul>
+    }
+
+    <div class="meta">
+      <dl class="times">
+        <div>
+          <dt>Prep</dt>
+          <dd>{{ formatMinutes(r.prepMinutes) }}</dd>
+        </div>
+        <div>
+          <dt>Cook</dt>
+          <dd>{{ formatMinutes(r.cookMinutes) }}</dd>
+        </div>
+        <div>
+          <dt>Total</dt>
+          <dd>{{ formatMinutes(r.totalMinutes) }}</dd>
+        </div>
+      </dl>
+      <div class="servings">
+        <!-- SLOT(Oak): <app-servings-scaler> replaces this static count. -->
+        <span class="label">Servings</span>
+        <span class="serves">{{ r.servings }}</span>
+      </div>
+      <a class="btn btn-primary start" [routerLink]="['/recipes', r.slug, 'cook']">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"
+          />
+        </svg>
+        Start cooking
+      </a>
+    </div>
+  </header>
+
+  <div class="body">
+    <section class="ingredients" aria-labelledby="ingredients-heading">
+      <div class="section-head">
+        <h2 id="ingredients-heading" class="h">Ingredients</h2>
+        <span class="progress">{{ r.ingredients.length }} items</span>
+      </div>
+      <!-- SLOT(Oak): <app-ingredient-checklist> turns these rows into check buttons. -->
+      @for (g of groups(); track $index) {
+        @if (g.name) {
+          <h3 class="group">{{ g.name }}</h3>
+        }
+        <ul class="list">
+          @for (i of g.items; track $index) {
+            <li>
+              <div class="check">
+                <span class="ing">
+                  @if (i.qty !== undefined) {
+                    <span class="qty"
+                      >{{ formatQuantity(i.qty) }}{{ i.unit ? ' ' + i.unit : '' }}</span
+                    >
+                  } @else if (i.unit) {
+                    <span class="qty">{{ i.unit }}</span>
+                  }
+                  {{ i.item }}
+                </span>
+              </div>
+            </li>
+          }
+        </ul>
       }
-    </p>
-  }
+    </section>
 
-  <h2>Ingredients</h2>
-  <ul>
-    @for (ingredient of r.ingredients; track $index) {
-      <li>{{ formatIngredient(ingredient) }}</li>
-    }
-  </ul>
+    <div class="main-col">
+      <section aria-labelledby="steps-heading">
+        <div class="section-head">
+          <h2 id="steps-heading" class="h">Steps</h2>
+          <span class="progress">{{ r.steps.length }} steps</span>
+        </div>
+        <ol class="list">
+          @for (s of r.steps; track $index) {
+            <li>
+              <div class="check step">
+                <span class="num" aria-hidden="true"
+                  ><span class="n">{{ $index + 1 }}</span></span
+                >
+                <span class="step-text">
+                  <span class="sr-only">Step {{ $index + 1 }}. </span>
+                  @if (s.title) {
+                    <strong class="step-title">{{ s.title }}</strong>
+                  }
+                  {{ s.text }}
+                  @if (s.timerMinutes) {
+                    <span class="timer-hint">Timer · {{ formatMinutes(s.timerMinutes) }}</span>
+                  }
+                </span>
+              </div>
+            </li>
+          }
+        </ol>
+      </section>
 
-  <h2>Steps</h2>
-  <ol>
-    @for (step of r.steps; track $index) {
-      <li>{{ step.text }}</li>
-    }
-  </ol>
-
-  @if (r.notes?.length) {
-    <h2>Notes</h2>
-    @for (note of r.notes; track $index) {
-      <p>{{ note }}</p>
-    }
-  }
+      @if (r.notes?.length || r.basedOn) {
+        <section class="notes-section" aria-labelledby="notes-heading">
+          <h2 id="notes-heading" class="h">Cooking notes</h2>
+          @if (r.notes?.length) {
+            <div class="notes">
+              @for (note of r.notes; track $index) {
+                <p>{{ note }}</p>
+              }
+            </div>
+          }
+          @if (r.basedOn; as source) {
+            <p class="source">
+              Source
+              @if (isUrl(source)) {
+                <a [href]="source" rel="noopener">
+                  {{ sourceHost(source) }}
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7M8 7h9v9" />
+                  </svg>
+                </a>
+              } @else {
+                <span class="source-name">{{ source }}</span>
+              }
+            </p>
+          }
+        </section>
+      }
+    </div>
+  </div>
 </article>

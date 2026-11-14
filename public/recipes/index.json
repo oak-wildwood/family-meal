@@ -1,4 +1,48 @@
 [
-  {"slug": "spike-test-lentil-soup", "name": "Spike Test Lentil Soup", "tags": ["soup", "vegetarian"]},
-  {"slug": "creamy-razor-clam-chowder", "name": "Creamy Razor Clam Chowder", "tags": ["soup", "seafood"]}
+  {
+    "slug": "creamy-razor-clam-chowder",
+    "name": "Creamy Razor Clam Chowder",
+    "tags": [
+      "soup",
+      "seafood"
+    ],
+    "totalMinutes": 45,
+    "ingredients": [
+      "bacon, diced",
+      "small onion, diced",
+      "celery stalk, diced",
+      "garlic clove, minced",
+      "all-purpose flour",
+      "clam juice",
+      "Yukon Gold potatoes, diced",
+      "fresh thyme sprig",
+      "bay leaf",
+      "heavy cream",
+      "whole milk",
+      "chopped razor clams, thawed with their juice",
+      "black pepper"
+    ]
+  },
+  {
+    "slug": "spike-test-lentil-soup",
+    "name": "Spike Test Lentil Soup",
+    "tags": [
+      "soup",
+      "vegetarian"
+    ],
+    "totalMinutes": 50,
+    "ingredients": [
+      "olive oil",
+      "yellow onion, diced",
+      "carrots, peeled and diced",
+      "garlic, minced",
+      "ground cumin",
+      "brown lentils, rinsed",
+      "vegetable broth",
+      "diced tomatoes",
+      "baby spinach",
+      "lemon juice",
+      "Salt and black pepper, to taste"
+    ]
+  }
 ]

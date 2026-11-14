@@ -1,1 +1,363 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+ * Family Meal design tokens and shared primitives, from the Claude Design canvas
+ * (Tokens board). Light and dark follow the phone. One accent: Saffron.
+ * Every text color passes WCAG 2.2 AA (4.5:1); control edges and focus rings 3:1.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --chip: #ededea;
+  --text: #1c1c1a;
+  --muted: #5c5c57;
+  /* Dividers only, never a control edge. */
+  --line: #e2e2de;
+  /* Inputs, checkboxes and other control edges (3:1). */
+  --border: #8a8a84;
+
+  --accent: #8a5600;
+  --accent-soft: #f8f0e0;
+  /* Filled buttons: one shade darker so white text clears 4.5:1. */
+  --accent-btn: #7a4b00;
+  --on-accent: #ffffff;
+
+  --sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+
+  --gutter: 24px;
+  --content: 720px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141413;
+    --surface: #1d1d1c;
+    --chip: #2a2a28;
+    --text: #edede9;
+    --muted: #a6a6a0;
+    --line: #2f2f2d;
+    --border: #7a7a74;
+
+    --accent: #e9b24e;
+    --accent-soft: #33290f;
+    --accent-btn: #e9b24e;
+    --on-accent: #141413;
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    --gutter: 16px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Headings: Newsreader with optical sizing. */
+.h {
+  margin: 0;
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Page container: phone gutter (and notch insets), centered column on wider screens. */
+.page {
+  width: 100%;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
+}
+
+/* ---- Shared primitives ---- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--chip);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.chip[aria-pressed='true'],
+.chip[aria-current='page'] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 24px;
+  border-radius: 14px;
+  border: 0;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent-btn);
+  color: var(--on-accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+
+.btn:disabled {
+  cursor: default;
+  background: transparent;
+  color: var(--muted);
+  border: 1.5px solid var(--line);
+}
+
+.iconbtn {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 0;
+  background: var(--chip);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 44px;
+  padding-right: 12px;
+  border-radius: 10px;
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* Servings stepper (for app-servings-scaler). */
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--chip);
+}
+
+.stepper button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.stepper button:disabled {
+  color: var(--muted);
+  opacity: 0.6;
+  cursor: default;
+}
+
+.stepper output {
+  min-width: 40px;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Check rows (for app-ingredient-checklist). Ingredient markup:
+ *   <li><button type="button" class="check" [attr.aria-pressed]="done">
+ *     <span class="box"><svg>…check mark…</svg></span>
+ *     <span class="ing"><span class="qty">1 cup</span> rice</span>
+ *   </button></li>
+ * Steps use class="check step" and <span class="num"><span class="n">1</span><svg/></span>.
+ * The recipe page renders the same rows as plain <div class="check"> until then.
+ */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list > li {
+  border-bottom: 1px solid var(--line);
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  text-align: left;
+  line-height: 1.45;
+}
+
+button.check {
+  cursor: pointer;
+}
+
+.box {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  color: transparent;
+}
+
+.check[aria-pressed='true'] .box {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.check[aria-pressed='true'] .ing {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--border);
+}
+
+.qty {
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.step {
+  padding: 16px 0;
+}
+
+.num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.num svg {
+  display: none;
+}
+
+.step[aria-pressed='true'] .num {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.step[aria-pressed='true'] .num .n {
+  display: none;
+}
+
+.step[aria-pressed='true'] .num svg {
+  display: block;
+}
+
+.step[aria-pressed='true'] .step-text {
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .chip,
+  .btn,
+  .box,
+  .num {
+    transition:
+      background-color 120ms ease,
+      border-color 120ms ease,
+      color 120ms ease;
+  }
+}

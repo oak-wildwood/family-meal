@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import manifest from '../../../public/recipes/index.json';
-import { RecipeSummary } from './recipe.model';
+import { Recipe, RecipeSummary } from './recipe.model';
 
 /**
  * getPrerenderParams reads the manifest, so a recipe file missing from it is
@@ -14,7 +14,7 @@ const recipes = readdirSync(DIR)
   .filter((name) => name.endsWith('.json') && name !== 'index.json')
   .map((name) => ({
     file: name.replace(/\.json$/, ''),
-    recipe: JSON.parse(readFileSync(`${DIR}/${name}`, 'utf8')) as RecipeSummary,
+    recipe: JSON.parse(readFileSync(`${DIR}/${name}`, 'utf8')) as Recipe,
   }));
 
 const rows = manifest as RecipeSummary[];
@@ -24,13 +24,15 @@ describe('recipe manifest', () => {
     expect(rows.map((r) => r.slug).sort()).toEqual(recipes.map((r) => r.file).sort());
   });
 
-  it('matches each file on slug, name and tags', () => {
+  it('matches each file (run `npm run recipe:index` if this fails)', () => {
     for (const { file, recipe } of recipes) {
       expect(recipe.slug).toBe(file);
       expect(rows.find((r) => r.slug === file)).toEqual({
         slug: recipe.slug,
         name: recipe.name,
         tags: recipe.tags,
+        totalMinutes: recipe.totalMinutes,
+        ingredients: recipe.ingredients.map((i) => i.item),
       });
     }
   });

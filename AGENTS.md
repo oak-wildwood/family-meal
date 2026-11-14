@@ -39,8 +39,11 @@ wire, explain and review.
   decides otherwise. Don't replace it with a `robots.txt` Disallow: a crawler blocked by
   robots.txt never sees the noindex.
 - **Don't write the feature logic in the practice shells** (`servings-scaler`,
-  `ingredient-checklist`, `recipe-list`). Oak writes those to practice; a
-  finished implementation defeats the point. Give hints, reviews and fixes to plumbing and setup.
+  `ingredient-checklist`). Oak writes those to practice; a finished implementation defeats the
+  point. Give hints, reviews and fixes to plumbing and setup. Their markup and styles are ready:
+  the classes (`.stepper`, `.check`, `.box`, `.num`, `aria-pressed` states) live in
+  `src/styles.css`, and `recipe-page.html` marks the `SLOT(Oak)` each one replaces. Home
+  (`recipe-list`) and cook mode (`cook-mode`) are not practice shells; agents may change them.
 - **Never comment `@claude` or `@flytrap`, and never edit `.github/workflows/`.** Each run
   spends Oak's Claude usage. Workflow changes happen in local sessions with Oak; the shared
   workflows live in `oak-wildwood/gh-repo-init`.
@@ -63,7 +66,12 @@ wire, explain and review.
 - **`image` is an absolute `https://` URL** built from `SITE_ORIGIN`; an importer fetching
   server-side has nothing to resolve a relative URL against.
 - **Every recipe file is listed in `public/recipes/index.json`.** `getPrerenderParams` reads that
-  manifest, so an unlisted recipe is never prerendered and its URL 404s. A spec checks the match.
+  manifest, so an unlisted recipe is never prerendered and its URL 404s. Don't edit it by hand:
+  `npm run recipe:index` regenerates it from the recipe files, and a spec checks the match.
+- **Design tokens live in `src/styles.css`** (from the Claude Design canvas). Use the custom
+  properties, never raw hex in a component; light and dark follow `prefers-color-scheme`.
+- **Phone first.** Every screen must work at 360px wide with no horizontal scroll, 44px touch
+  targets, inputs at 16px or larger (iOS zooms otherwise) and `env(safe-area-inset-*)` padding.
 - **Slugs are permanent once deployed.** The URL may already be shared or saved in AnyList.
 
 ## Working in this repo
