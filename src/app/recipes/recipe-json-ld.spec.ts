@@ -77,6 +77,16 @@ describe('toJsonLd', () => {
     ]);
   });
 
+  it('emits a source URL as isBasedOn', () => {
+    const fromSite: Recipe = { ...recipe, basedOn: 'https://example.test/soup' };
+    expect(toJsonLd(fromSite, ORIGIN)['isBasedOn']).toBe('https://example.test/soup');
+  });
+
+  it('emits a source name as a named CreativeWork', () => {
+    const fromClaude: Recipe = { ...recipe, basedOn: 'Claude' };
+    expect(toJsonLd(fromClaude, ORIGIN)['isBasedOn']).toEqual({ '@type': 'CreativeWork', name: 'Claude' });
+  });
+
   it('makes the image URL absolute', () => {
     const withImage: Recipe = { ...recipe, image: '/recipes/images/soup.jpg' };
     expect(toJsonLd(withImage, ORIGIN)['image']).toBe('https://example.test/recipes/images/soup.jpg');

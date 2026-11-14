@@ -30,14 +30,14 @@ Converting a card:
 
 | Card | JSON |
 |---|---|
-| Ingredient "0.5 small onion, diced" | `{ "qty": 0.5, "unit": "small", "item": "onion, diced" }` |
-| Countable item, no unit ("2 carrots") | `{ "qty": 2, "item": "carrots" }` |
+| Ingredient "0.5 cups heavy cream" | `{ "qty": 0.5, "unit": "cup", "item": "heavy cream" }`: unit singular at 1 or less |
+| Countable item ("0.5 small onion, diced") | `{ "qty": 0.5, "item": "small onion, diced" }` |
 | No quantity ("Salt, to taste") | `{ "item": "Salt, to taste" }` |
 | Ingredient sections ("For the dressing") | `group` on each line in that section |
-| Step "Render the bacon: Cook it until crisp, 5 minutes" | `{ "title": "Render the bacon", "text": "Cook it until crisp, 5 minutes.", "timerMinutes": 5 }` |
+| Step "Render the bacon: Cook 2 slices bacon, diced until crisp (5 minutes 05:00)" | `{ "title": "Render the bacon", "text": "Cook the bacon until crisp, about 5 minutes.", "timerMinutes": 5 }`: name the ingredient, drop the quantity the card repeats, fold the timer into the text |
 | Timer range ("25 to 30 minutes") | `timerMinutes` = the upper bound |
 | Notes paragraph | `notes`: one short cooking note per array item |
-| Named source website | `basedOn`: its URL |
+| Source | `basedOn`: the URL of a named source website; otherwise `"Claude"` for a Claude card. The card's "Results from the web" list is search context, not a source |
 
 **Decimals.** Cards round to one decimal, so a third shows as 0.3. Store the true fraction to
 three places, and the site formats it back: 0.1 → `0.125`, 0.3 → `0.333`, 0.7 → `0.667`,
@@ -45,16 +45,19 @@ three places, and the site formats it back: 0.1 → `0.125`, 0.3 → `0.333`, 0.
 value could be two fractions (0.2 is 1/4 or 1/5), compare the step text, which usually repeats
 the ingredient, and ask Oak if it still reads two ways.
 
-**Times.** `prepMinutes`, `cookMinutes` and `totalMinutes` come from the card. AnyList shows them,
-so a missing time is a question for Oak, answered before you write the file.
+**Times.** `prepMinutes`, `cookMinutes` and `totalMinutes` come from the card. Cards often have
+none, and AnyList shows them, so a missing time is a question for Oak (offer an estimate from the
+steps), answered before you write the file.
 
 **Description and tags.** One neutral line that describes the dish. Tags are lowercase and
 neutral (dish type, main ingredient, diet); reuse tags already in `index.json`.
 
 **Public content.** Write each step in plain recipe language. Keep chat context, who the recipe
 is for, and anything about the household out of every field and out of the commit and PR text.
-The share link itself stays out of the repo. Notes are public too: keep them to cooking notes
-("less salt next time").
+The share link itself stays out of the repo. Cards are written for Oak's own situation, so check
+each line for places (a region, a coast, a store) and his batch or shopping math, and offer Oak a
+neutral version. Notes are public too: keep them to general cooking notes ("less salt next
+time").
 
 Done when every card ingredient and step has exactly one entry in the file, in card order.
 

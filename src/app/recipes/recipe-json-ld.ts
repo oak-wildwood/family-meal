@@ -36,6 +36,16 @@ export function isoDuration(minutes: number): string {
   return `PT${h ? `${h}H` : ''}${m || !h ? `${m}M` : ''}`;
 }
 
+/** True for an http(s) URL; anything else is a name, such as "Claude". */
+export function isUrl(value: string): boolean {
+  return /^https?:\/\//.test(value);
+}
+
+/** schema.org wants a URL or a CreativeWork here, so a plain name becomes a named CreativeWork. */
+function basedOnJsonLd(basedOn: string): string | Record<string, string> {
+  return isUrl(basedOn) ? basedOn : { '@type': 'CreativeWork', name: basedOn };
+}
+
 /**
  * schema.org Recipe JSON-LD. Groups are flattened (AnyList wants one string per
  * line), and notes, tags and timers are site-only.
@@ -52,7 +62,7 @@ export function toJsonLd(recipe: Recipe, siteOrigin: string): Record<string, unk
     cookTime: isoDuration(recipe.cookMinutes),
     totalTime: isoDuration(recipe.totalMinutes),
     ...(recipe.category && { recipeCategory: recipe.category }),
-    ...(recipe.basedOn && { isBasedOn: recipe.basedOn }),
+    ...(recipe.basedOn && { isBasedOn: basedOnJsonLd(recipe.basedOn) }),
     recipeIngredient: recipe.ingredients.map(formatIngredient),
     recipeInstructions: recipe.steps.map((step) => ({
       '@type': 'HowToStep',

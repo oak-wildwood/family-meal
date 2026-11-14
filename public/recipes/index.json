@@ -1,3 +1,4 @@
 [
-  { "slug": "spike-test-lentil-soup", "name": "Spike Test Lentil Soup", "tags": ["soup", "vegetarian"] }
+  {"slug": "spike-test-lentil-soup", "name": "Spike Test Lentil Soup", "tags": ["soup", "vegetarian"]},
+  {"slug": "creamy-razor-clam-chowder", "name": "Creamy Razor Clam Chowder", "tags": ["soup", "seafood"]}
 ]
