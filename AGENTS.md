@@ -70,6 +70,13 @@ wire, explain and review.
   `npm run recipe:index` regenerates it from the recipe files, and a spec checks the match.
 - **Design tokens live in `src/styles.css`** (from the Claude Design canvas). Use the custom
   properties, never raw hex in a component; light and dark follow `prefers-color-scheme`.
+- **The service worker is hand-written (`public/sw.js`); don't swap in `@angular/service-worker`.**
+  Angular's worker answers every navigation with the cached `index.html`, which on this prerendered
+  site is the Home page, and that breaks hydration on recipe pages. Pages are network-first with an
+  offline copy. Bump `VERSION` in `sw.js` when the caching scheme changes, so old caches are dropped.
+  The worker only registers in production builds, not under `ng serve`.
+- **Icons come from SVG sources.** Edit `scripts/icons/*.svg` (from the canvas's Logo board),
+  then `npm run icons`. Never hand-edit the PNGs in `public/icons/`.
 - **Phone first.** Every screen must work at 360px wide with no horizontal scroll, 44px touch
   targets, inputs at 16px or larger (iOS zooms otherwise) and `env(safe-area-inset-*)` padding.
 - **Slugs are permanent once deployed.** The URL may already be shared or saved in AnyList.
