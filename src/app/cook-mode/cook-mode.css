@@ -33,6 +33,20 @@
   text-overflow: ellipsis;
 }
 
+.ing-btn {
+  flex: none;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--chip);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .counter {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
@@ -203,4 +217,74 @@
   padding: 0 16px;
   border-radius: 16px;
   font-size: 19px;
+}
+
+/* Bottom sheet: slides over the step, scrolls on its own, closes back to the same step. */
+.sheet {
+  width: 100%;
+  max-width: 640px;
+  max-height: 85dvh;
+  margin: auto auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: 22px 22px 0 0;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.sheet::backdrop {
+  background: var(--scrim);
+}
+
+.sheet-inner {
+  display: flex;
+  flex-direction: column;
+  max-height: 85dvh;
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px max(20px, env(safe-area-inset-right)) 8px max(20px, env(safe-area-inset-left));
+}
+
+.sheet-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sheet-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom))
+    max(20px, env(safe-area-inset-left));
+}
+
+.sheet-group {
+  margin: 20px 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sheet-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 19px;
+  line-height: 1.4;
+}
+
+.sheet-list li:last-child {
+  border-bottom: 0;
 }

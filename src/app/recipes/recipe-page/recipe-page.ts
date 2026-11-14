@@ -1,14 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Logo } from '../../logo/logo';
-import { formatMinutes, sourceHost, tagLabel } from '../display';
+import { formatMinutes, groupIngredients, sourceHost, tagLabel } from '../display';
 import { formatQuantity, isUrl } from '../recipe-json-ld';
-import { Ingredient, Recipe } from '../recipe.model';
-
-interface IngredientGroup {
-  name?: string;
-  items: Ingredient[];
-}
+import { Recipe } from '../recipe.model';
 
 /**
  * The recipe page. Renders from the same Recipe as the JSON-LD (set in the
@@ -27,16 +22,7 @@ export class RecipePage {
   /** Bound from the route's `recipe` resolver via withComponentInputBinding. */
   readonly recipe = input.required<Recipe>();
 
-  /** Consecutive lines that share a `group` heading, in file order. */
-  protected readonly groups = computed(() => {
-    const groups: IngredientGroup[] = [];
-    for (const item of this.recipe().ingredients) {
-      const last = groups.at(-1);
-      if (last && last.name === item.group) last.items.push(item);
-      else groups.push({ name: item.group, items: [item] });
-    }
-    return groups;
-  });
+  protected readonly groups = computed(() => groupIngredients(this.recipe().ingredients));
 
   // The template splits each line the way formatIngredient orders it (quantity,
   // unit, item) so the quantity can be bold; the JSON-LD still uses formatIngredient.

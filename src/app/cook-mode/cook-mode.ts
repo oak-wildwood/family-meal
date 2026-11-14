@@ -4,13 +4,16 @@ import {
   DestroyRef,
   afterNextRender,
   computed,
+  ElementRef,
   inject,
   input,
   signal,
+  viewChild,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { formatClock } from '../recipes/display';
+import { formatClock, groupIngredients } from '../recipes/display';
+import { formatQuantity } from '../recipes/recipe-json-ld';
 import { Recipe } from '../recipes/recipe.model';
 import * as T from './cook-timers';
 
@@ -21,6 +24,9 @@ import * as T from './cook-timers';
  *
  * Timers belong to their step and keep running when you move on, since "roast
  * 25 minutes" usually overlaps the next steps. A strip shows timers on other steps.
+ *
+ * The ingredient list opens as a sheet over the current step, so checking an
+ * amount never loses your place.
  */
 @Component({
   selector: 'app-cook-mode',
@@ -41,6 +47,10 @@ export class CookMode {
   private readonly now = signal(Date.now());
   /** Set once the browser grants a screen wake lock. */
   protected readonly screenStaysOn = signal(false);
+
+  protected readonly groups = computed(() => groupIngredients(this.recipe().ingredients));
+  protected readonly formatQuantity = formatQuantity;
+  private readonly sheet = viewChild.required<ElementRef<HTMLDialogElement>>('sheet');
 
   protected readonly count = computed(() => this.recipe().steps.length);
   protected readonly step = computed(() => this.recipe().steps[this.index()]);
@@ -92,6 +102,19 @@ export class CookMode {
     this.index.set(Math.min(Math.max(i, 0), this.count() - 1));
   }
 
+  protected openIngredients(): void {
+    this.sheet().nativeElement.showModal();
+  }
+
+  protected closeIngredients(): void {
+    this.sheet().nativeElement.close();
+  }
+
+  /** A tap on the backdrop lands on the dialog itself, not on its content. */
+  protected onSheetClick(event: MouseEvent): void {
+    if (event.target === this.sheet().nativeElement) this.closeIngredients();
+  }
+
   protected toggleTimer(): void {
     const step = this.index();
     const minutes = this.step().timerMinutes;
@@ -114,6 +137,8 @@ export class CookMode {
 
   protected onKey(event: KeyboardEvent): void {
     if (event.altKey || event.ctrlKey || event.metaKey) return;
+    // Arrow keys scroll the open sheet; they shouldn't change the step behind it.
+    if (this.sheet().nativeElement.open) return;
     if (event.key === 'ArrowRight') this.go(this.index() + 1);
     else if (event.key === 'ArrowLeft') this.go(this.index() - 1);
   }
