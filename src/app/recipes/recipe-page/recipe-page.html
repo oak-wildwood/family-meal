@@ -1,6 +1,9 @@
 @let r = recipe();
 <article>
   <h1>{{ r.name }}</h1>
+  @if (r.image) {
+    <img [src]="r.image" [alt]="r.name" width="1200" height="900" />
+  }
   <p>{{ r.description }}</p>
   <p>
     Serves {{ r.servings }} · Prep {{ r.prepMinutes }} min · Cook {{ r.cookMinutes }} min ·

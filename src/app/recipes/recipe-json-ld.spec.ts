@@ -40,7 +40,15 @@ const recipe = seed as Recipe;
 
 describe('toJsonLd', () => {
   it('builds exactly the JSON-LD that passed the AnyList spike', () => {
-    expect(toJsonLd(recipe, ORIGIN)).toEqual(VARIANT_A);
+    const { image, ...withoutImage } = recipe;
+    expect(toJsonLd(withoutImage, ORIGIN)).toEqual(VARIANT_A);
+  });
+
+  it('adds the seed image as an absolute URL, as in spike variant D', () => {
+    expect(toJsonLd(recipe, ORIGIN)).toEqual({
+      ...VARIANT_A,
+      image: 'https://example.test/recipes/images/spike-test-lentil-soup.jpg',
+    });
   });
 
   it('flattens ingredient groups into one line each, in order', () => {

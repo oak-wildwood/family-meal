@@ -8,6 +8,7 @@
   "totalMinutes": 50,
   "category": "Soup",
   "tags": ["soup", "vegetarian"],
+  "image": "/recipes/images/spike-test-lentil-soup.jpg",
   "ingredients": [
     { "qty": 1, "unit": "tablespoon", "item": "olive oil" },
     { "qty": 1, "item": "yellow onion, diced" },
