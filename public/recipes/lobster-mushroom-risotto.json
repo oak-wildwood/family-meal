@@ -1,0 +1,36 @@
+{
+  "slug": "lobster-mushroom-risotto",
+  "name": "Lobster Mushroom Risotto",
+  "description": "Creamy arborio risotto with diced lobster mushrooms, shallot, celery and sherry, finished with Parmesan and herbs.",
+  "servings": 4,
+  "prepMinutes": 15,
+  "cookMinutes": 35,
+  "totalMinutes": 50,
+  "category": "Pasta",
+  "tags": ["mushroom", "rice"],
+  "basedOn": "https://langdoncook.com/2009/10/25/x-country-double-lobster-risotto/",
+  "ingredients": [
+    { "qty": 4, "unit": "tablespoons", "item": "butter" },
+    { "qty": 0.5, "unit": "pound", "item": "lobster mushrooms, diced" },
+    { "qty": 1, "item": "large shallot, diced" },
+    { "qty": 1, "item": "celery rib, diced" },
+    { "qty": 1, "item": "garlic clove, minced" },
+    { "qty": 0.25, "unit": "cup", "item": "dry sherry" },
+    { "qty": 2, "unit": "cups", "item": "arborio rice" },
+    { "qty": 8, "unit": "cups", "item": "chicken or seafood stock, kept warm" },
+    { "qty": 0.25, "unit": "cup", "item": "grated Parmesan" },
+    { "qty": 2, "unit": "tablespoons", "item": "chopped parsley or chives" }
+  ],
+  "steps": [
+    { "title": "Warm the stock", "text": "Heat the stock in a saucepan and keep it at a gentle simmer, not a boil, while you cook the rice." },
+    { "title": "Sauté the base", "text": "Melt the butter in a wide, heavy pot over medium-high heat. Cook the shallot, celery, garlic and mushrooms until the shallot turns translucent.", "timerMinutes": 5 },
+    { "title": "Add the sherry and rice", "text": "Pour in the sherry and cook until most of the alcohol has evaporated. Stir in the rice to coat it in the butter and cook for a couple of minutes.", "timerMinutes": 3 },
+    { "title": "Add the stock", "text": "Add the warm stock one ladleful at a time, stirring and letting each addition absorb before the next, until the rice is tender but still al dente and the risotto is creamy, not soupy.", "timerMinutes": 25 },
+    { "title": "Finish and serve", "text": "Take the pot off the heat and stir in the Parmesan. Spoon into bowls and sprinkle with the parsley or chives." }
+  ],
+  "notes": [
+    "The original recipe also adds cooked lobster meat at the end; the mushrooms are good on their own.",
+    "Dry white wine or dry vermouth can stand in for the sherry.",
+    "This makes a large pot. Halve everything for a smaller batch."
+  ]
+}

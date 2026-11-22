@@ -137,5 +137,26 @@
       "chopped razor clams, thawed with their juice",
       "black pepper"
     ]
+  },
+  {
+    "slug": "lobster-mushroom-risotto",
+    "name": "Lobster Mushroom Risotto",
+    "tags": [
+      "mushroom",
+      "rice"
+    ],
+    "totalMinutes": 50,
+    "ingredients": [
+      "butter",
+      "lobster mushrooms, diced",
+      "large shallot, diced",
+      "celery rib, diced",
+      "garlic clove, minced",
+      "dry sherry",
+      "arborio rice",
+      "chicken or seafood stock, kept warm",
+      "grated Parmesan",
+      "chopped parsley or chives"
+    ]
   }
 ]
