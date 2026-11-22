@@ -1,0 +1,41 @@
+{
+  "slug": "crawfish-etouffee",
+  "name": "Crawfish Étouffée",
+  "description": "Crawfish tails in a smothered butter-roux sauce with onion, bell pepper and celery, served over rice.",
+  "servings": 4,
+  "prepMinutes": 15,
+  "cookMinutes": 30,
+  "totalMinutes": 45,
+  "category": "Seafood",
+  "tags": ["seafood", "cajun"],
+  "basedOn": "https://www.explorelouisiana.com/culinary/recipes/crawfish-etouffee-recipe-and-instructional-video",
+  "ingredients": [
+    { "qty": 0.25, "unit": "cup", "item": "unsalted butter" },
+    { "qty": 0.25, "unit": "cup", "item": "all-purpose flour" },
+    { "qty": 1, "unit": "cup", "item": "onion, chopped" },
+    { "qty": 0.5, "unit": "cup", "item": "green bell pepper, chopped" },
+    { "qty": 0.25, "unit": "cup", "item": "celery, chopped" },
+    { "qty": 2, "unit": "teaspoons", "item": "garlic, minced" },
+    { "qty": 2, "unit": "cups", "item": "seafood or chicken stock" },
+    { "qty": 1, "unit": "teaspoon", "item": "kosher salt" },
+    { "qty": 0.25, "unit": "teaspoon", "item": "Cajun seasoning, plus more to taste" },
+    { "item": "Black pepper, to taste" },
+    { "qty": 1, "unit": "pound", "item": "crawfish tails, thawed and drained if frozen" },
+    { "qty": 1, "unit": "tablespoon", "item": "fresh parsley, chopped, plus more for garnish" },
+    { "qty": 0.25, "unit": "cup", "item": "green onion, sliced, plus more for garnish" },
+    { "item": "Hot cooked rice, for serving" }
+  ],
+  "steps": [
+    { "title": "Prep the vegetables", "text": "Chop the onion, bell pepper, celery, parsley and green onion, and mince the garlic, so everything is ready before the roux starts." },
+    { "title": "Make the roux", "text": "Melt the butter in a large skillet over medium heat. Stir in the flour and cook, stirring constantly, until the roux turns a caramel color.", "timerMinutes": 4 },
+    { "title": "Cook the vegetables", "text": "Add the onion, bell pepper and celery and cook until tender. Add the garlic and cook for 1 more minute.", "timerMinutes": 4 },
+    { "title": "Add the stock", "text": "Slowly stir in the stock until the sauce is smooth. Season with the salt, black pepper and Cajun seasoning." },
+    { "title": "Simmer", "text": "Bring to a boil, then reduce to medium-low, cover and simmer, stirring occasionally.", "timerMinutes": 15 },
+    { "title": "Add the crawfish", "text": "Stir in the crawfish tails and cook just until heated through. Stir in the parsley and green onion, saving a little of each for garnish.", "timerMinutes": 3 },
+    { "title": "Serve", "text": "Spoon over hot rice and garnish with the reserved parsley and green onion." }
+  ],
+  "notes": [
+    "Thaw frozen crawfish tails completely and drain off the liquid so it doesn't thin the sauce.",
+    "Add Cajun seasoning gradually and taste before adding more."
+  ]
+}

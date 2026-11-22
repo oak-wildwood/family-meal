@@ -69,6 +69,31 @@
     ]
   },
   {
+    "slug": "crawfish-etouffee",
+    "name": "Crawfish Étouffée",
+    "tags": [
+      "seafood",
+      "cajun"
+    ],
+    "totalMinutes": 45,
+    "ingredients": [
+      "unsalted butter",
+      "all-purpose flour",
+      "onion, chopped",
+      "green bell pepper, chopped",
+      "celery, chopped",
+      "garlic, minced",
+      "seafood or chicken stock",
+      "kosher salt",
+      "Cajun seasoning, plus more to taste",
+      "Black pepper, to taste",
+      "crawfish tails, thawed and drained if frozen",
+      "fresh parsley, chopped, plus more for garnish",
+      "green onion, sliced, plus more for garnish",
+      "Hot cooked rice, for serving"
+    ]
+  },
+  {
     "slug": "creamy-dill-cucumber-salad",
     "name": "Creamy Dill Cucumber Salad",
     "tags": [
