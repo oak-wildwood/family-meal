@@ -1,6 +1,11 @@
 -- The pantry and the meal plan (ADR 0001). Owner-only for both reading and writing:
 -- the anon role gets no privileges on these tables at all, and the policies match rows
 -- to the signed-in owner.
+--
+-- Foreign key checks bypass RLS, so the write policies also check that what a row points
+-- at belongs to the same owner: a pantry item's ingredient (in its policies) and a leftover's
+-- source entry (a composite foreign key). A plan entry's recipe is public to read, so it is
+-- not restricted.
 
 create table public.pantry_items (
   id uuid primary key default gen_random_uuid(),
@@ -27,10 +32,15 @@ create table public.meal_plan_entries (
   recipe_id uuid not null references public.recipes (id) on delete restrict,
   kind text not null check (kind in ('cook', 'leftover')),
   -- For a leftover, the cook entry it comes from. A cook entry has none.
-  source_entry_id uuid references public.meal_plan_entries (id) on delete cascade,
+  source_entry_id uuid,
   cooked_at timestamptz,
   created_at timestamptz not null default now(),
-  check ((kind = 'leftover') = (source_entry_id is not null))
+  check ((kind = 'leftover') = (source_entry_id is not null)),
+  unique (owner_id, id),
+  -- Composite, so a leftover can only point at a cook entry with the same owner. (A policy
+  -- that looked the entry up would recurse into its own table.) Null source: not checked.
+  foreign key (owner_id, source_entry_id)
+    references public.meal_plan_entries (owner_id, id) on delete cascade
 );
 
 create index meal_plan_entries_owner_date_idx on public.meal_plan_entries (owner_id, plan_date);
@@ -50,11 +60,23 @@ create policy "the owner reads the pantry"
   using (owner_id = (select auth.uid()));
 create policy "the owner inserts pantry items"
   on public.pantry_items for insert to authenticated
-  with check (owner_id = (select auth.uid()));
+  with check (
+    owner_id = (select auth.uid())
+    and exists (
+      select 1 from public.ingredients i
+      where i.id = ingredient_id and i.owner_id = (select auth.uid())
+    )
+  );
 create policy "the owner updates pantry items"
   on public.pantry_items for update to authenticated
   using (owner_id = (select auth.uid()))
-  with check (owner_id = (select auth.uid()));
+  with check (
+    owner_id = (select auth.uid())
+    and exists (
+      select 1 from public.ingredients i
+      where i.id = ingredient_id and i.owner_id = (select auth.uid())
+    )
+  );
 create policy "the owner deletes pantry items"
   on public.pantry_items for delete to authenticated
   using (owner_id = (select auth.uid()));

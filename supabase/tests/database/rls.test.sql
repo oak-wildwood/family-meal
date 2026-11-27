@@ -11,7 +11,7 @@ begin;
 
 create extension if not exists pgtap with schema extensions;
 
-select plan(43);
+select plan(63);
 
 -- Fixtures, created as the database owner (which bypasses RLS).
 insert into auth.users (id, email) values
@@ -19,7 +19,8 @@ insert into auth.users (id, email) values
   ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', 'other-test@example.test');
 
 insert into public.ingredients (id, owner_id, name) values
-  ('11111111-1111-4111-8111-111111111111', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', 'test lentils');
+  ('11111111-1111-4111-8111-111111111111', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', 'test lentils'),
+  ('77777777-7777-4777-8777-777777777777', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', 'other lentils');
 
 insert into public.recipes (id, owner_id, slug, name, description, servings, prep_minutes, cook_minutes, total_minutes) values
   ('22222222-2222-4222-8222-222222222222', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
@@ -39,6 +40,10 @@ insert into public.pantry_items (id, owner_id, ingredient_id) values
 insert into public.meal_plan_entries (id, owner_id, plan_date, meal, recipe_id, kind) values
   ('66666666-6666-4666-8666-666666666666', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '2030-01-01', 'dinner',
    '22222222-2222-4222-8222-222222222222', 'cook');
+
+-- A photo uploaded by the owner (storage records the uploader in owner_id).
+insert into storage.objects (id, bucket_id, name, owner_id) values
+  ('88888888-8888-4888-8888-888888888888', 'recipe-photos', 'test-photo.jpg', 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa');
 
 -- Every table in public has RLS switched on.
 select is(
@@ -132,6 +137,45 @@ select throws_ok(
   '42501', null, 'another user cannot write the owner''s pantry');
 select is_empty($$update public.pantry_items set on_hand = false returning id$$, 'another user cannot update the owner''s pantry');
 
+
+select throws_ok(
+  $$insert into public.recipe_ingredients (recipe_id, position, item, ingredient_id)
+    values ('22222222-2222-4222-8222-222222222222', 2, 'x', '77777777-7777-4777-8777-777777777777')$$,
+  '42501', null, 'another user cannot add an ingredient line to the owner''s recipe');
+select is_empty($$update public.recipe_ingredients set item = 'x' returning id$$, 'another user cannot update the owner''s ingredient lines');
+select is_empty($$delete from public.recipe_ingredients returning id$$, 'another user cannot delete the owner''s ingredient lines');
+select is_empty($$update public.recipe_steps set text = 'x' returning id$$, 'another user cannot update the owner''s steps');
+select is_empty($$delete from public.recipe_steps returning id$$, 'another user cannot delete the owner''s steps');
+
+select is_empty($$delete from public.pantry_items returning id$$, 'another user cannot delete the owner''s pantry items');
+select throws_ok(
+  $$insert into public.pantry_items (owner_id, ingredient_id)
+    values ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb', '11111111-1111-4111-8111-111111111111')$$,
+  '42501', null, 'a pantry item cannot point at the owner''s ingredient');
+
+select throws_ok(
+  $$insert into public.ingredients (owner_id, name) values ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', 'forged thing')$$,
+  '42501', null, 'another user cannot insert an ingredient as the owner');
+select is_empty($$update public.ingredients set name = 'hacked' where owner_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa' returning id$$, 'another user cannot update the owner''s ingredients');
+select is_empty($$delete from public.ingredients where owner_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa' returning id$$, 'another user cannot delete the owner''s ingredients');
+
+select throws_ok(
+  $$insert into public.meal_plan_entries (owner_id, plan_date, meal, recipe_id, kind)
+    values ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa', '2030-01-02', 'lunch', '22222222-2222-4222-8222-222222222222', 'cook')$$,
+  '42501', null, 'another user cannot write the owner''s meal plan');
+select is_empty($$update public.meal_plan_entries set meal = 'lunch' returning id$$, 'another user cannot update the owner''s meal plan');
+select is_empty($$delete from public.meal_plan_entries returning id$$, 'another user cannot delete the owner''s meal plan');
+select throws_ok(
+  $$insert into public.meal_plan_entries (plan_date, meal, recipe_id, kind, source_entry_id)
+    values ('2030-01-02', 'lunch', '22222222-2222-4222-8222-222222222222', 'leftover', '66666666-6666-4666-8666-666666666666')$$,
+  '23503', null, 'a leftover cannot point at the owner''s cook entry');
+
+-- Storage blocks direct deletes unless told otherwise; the policies are what is under test.
+set local storage.allow_delete_query = 'true';
+
+select is_empty($$update storage.objects set name = 'hijacked.jpg' where bucket_id = 'recipe-photos' returning id$$, 'another user cannot replace the owner''s photo');
+select is_empty($$delete from storage.objects where bucket_id = 'recipe-photos' returning id$$, 'another user cannot delete the owner''s photo');
+
 -- ---------------------------------------------------------------------------------
 -- The owner
 -- ---------------------------------------------------------------------------------
@@ -162,6 +206,16 @@ select throws_ok(
   $$insert into public.meal_plan_entries (plan_date, meal, recipe_id, kind)
     values ('2030-01-03', 'brunch', '22222222-2222-4222-8222-222222222222', 'cook')$$,
   '23514', null, 'a meal is lunch or dinner');
+
+select throws_ok(
+  $$insert into public.recipe_ingredients (recipe_id, position, item, ingredient_id)
+    values ('22222222-2222-4222-8222-222222222222', 3, 'x', '77777777-7777-4777-8777-777777777777')$$,
+  '42501', null, 'an ingredient line cannot point at another user''s ingredient');
+select throws_ok(
+  $$insert into public.pantry_items (ingredient_id) values ('77777777-7777-4777-8777-777777777777')$$,
+  '42501', null, 'a pantry item cannot point at another user''s ingredient');
+select isnt_empty($$update storage.objects set name = 'renamed.jpg' where bucket_id = 'recipe-photos' returning id$$, 'the uploader can replace their photo');
+select isnt_empty($$delete from storage.objects where bucket_id = 'recipe-photos' returning id$$, 'the uploader can delete their photo');
 
 select * from finish();
 

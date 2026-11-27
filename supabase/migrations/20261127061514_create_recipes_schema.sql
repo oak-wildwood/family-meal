@@ -139,26 +139,41 @@ create policy "the owner deletes recipes"
   using (owner_id = (select auth.uid()));
 
 -- Ingredient lines and steps have no owner column; they belong to whoever owns the recipe.
+-- Foreign key checks bypass RLS, so a line's write policy also checks that the standard
+-- ingredient it points at is the owner's own; otherwise a second account could attach rows
+-- it does not own.
 
 create policy "recipe ingredients are public to read"
   on public.recipe_ingredients for select to anon, authenticated
   using (true);
 create policy "the recipe owner inserts recipe ingredients"
   on public.recipe_ingredients for insert to authenticated
-  with check (exists (
+  with check (
+    exists (
     select 1 from public.recipes r
     where r.id = recipe_id and r.owner_id = (select auth.uid())
-  ));
+  )
+    and exists (
+    select 1 from public.ingredients i
+    where i.id = ingredient_id and i.owner_id = (select auth.uid())
+  )
+  );
 create policy "the recipe owner updates recipe ingredients"
   on public.recipe_ingredients for update to authenticated
   using (exists (
     select 1 from public.recipes r
     where r.id = recipe_id and r.owner_id = (select auth.uid())
   ))
-  with check (exists (
+  with check (
+    exists (
     select 1 from public.recipes r
     where r.id = recipe_id and r.owner_id = (select auth.uid())
-  ));
+  )
+    and exists (
+    select 1 from public.ingredients i
+    where i.id = ingredient_id and i.owner_id = (select auth.uid())
+  )
+  );
 create policy "the recipe owner deletes recipe ingredients"
   on public.recipe_ingredients for delete to authenticated
   using (exists (
