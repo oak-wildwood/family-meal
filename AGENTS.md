@@ -47,7 +47,10 @@ wire, explain and review.
 - **Start Claude runs only when Oak asks.** Each one spends Oak's Claude usage, so never start
   one unprompted. When asked: comment `@flytrap` on a PR for a Flytrap review, then report its
   findings to Oak; comment `@claude` on an issue or PR to hand it work; or add the `claude-task`
-  label to an issue to queue it for the nightly run.
+  label to an issue to queue it for the nightly run. **One standing exception:** a Factory Run
+  (`docs/factory/master-prompt.md`), which Oak starts himself, may comment `@flytrap` on its own
+  `factory/…` pull requests, at most twice per PR, and squash-merge them when every gate passes.
+  The authorization covers that Foreman session only, not ordinary sessions or the Actions Claude.
 - **Never edit `.github/workflows/`.** Workflow changes happen in local sessions with Oak; the
   shared workflows live in `oak-wildwood/gh-repo-init`.
 
@@ -83,6 +86,18 @@ wire, explain and review.
 - **Phone first.** Every screen must work at 360px wide with no horizontal scroll, 44px touch
   targets, inputs at 16px or larger (iOS zooms otherwise) and `env(safe-area-inset-*)` padding.
 - **Slugs are permanent once deployed.** The URL may already be shared or saved in AnyList.
+
+## The Factory
+
+The backend epic (#39) is built by a Factory Run: a local Foreman session that takes eligible
+`claude-task` issues, hands each to a Worker, and merges through CI (`check`, `secrets`,
+`conventional`) and a Flytrap review. Its prompt is `docs/factory/master-prompt.md`; its
+permissions live outside the repo. It files `human-task`, `angular-practice` and `fyi` issues for
+Oak instead of asking him anything. If you are a Worker, your brief is the source of truth; this
+file's hard rules still apply.
+
+Before opening a PR, `npm run verify` runs the unit tests, the build and the JSON-LD check on
+every recipe page.
 
 ## Working in this repo
 

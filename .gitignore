@@ -47,3 +47,6 @@ Thumbs.db
 # checked in. Per-machine settings are not.
 .claude/settings.local.json
 CLAUDE.local.md
+
+# Factory run logs and scratch files (hold real usage numbers; never commit)
+/.factory/
