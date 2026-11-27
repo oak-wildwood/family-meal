@@ -11,6 +11,8 @@
     "recipe:check": "node scripts/check-recipe.mjs",
     "recipe:check:all": "node scripts/check-all-recipes.mjs",
     "recipe:index": "node scripts/build-index.mjs",
+    "recipes:seed": "node scripts/import-recipes.mjs",
+    "recipes:images": "node scripts/import-recipes.mjs --images",
     "icons": "node scripts/make-icons.mjs",
     "image:strip": "node scripts/strip-jpeg-metadata.mjs",
     "verify": "npm run test:ci && npm run build && npm run recipe:check:all"

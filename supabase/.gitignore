@@ -1,0 +1,5 @@
+# Supabase CLI state and secrets. Never commit these.
+.branches
+.temp
+.env
+.env.*

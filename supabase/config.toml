@@ -1,0 +1,36 @@
+# Supabase CLI configuration for the LOCAL stack (`supabase start`).
+# The hosted project is wired up separately (issue #26); nothing here names it.
+project_id = "family-meal"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[db.seed]
+enabled = true
+# Generated from public/recipes/*.json by `npm run recipes:seed`.
+sql_paths = ["./seed.sql"]
+
+[studio]
+enabled = true
+port = 54323
+
+[storage]
+enabled = true
+file_size_limit = "5MiB"
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:4200"
+# One owner account (ADR 0001). A public sign-up would let anyone become a
+# signed-in user, and the write policies trust any signed-in user who owns the
+# row, so sign-ups stay off. The hosted project needs the same setting.
+enable_signup = false
