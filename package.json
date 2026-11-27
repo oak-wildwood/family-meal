@@ -7,10 +7,13 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false",
     "recipe:check": "node scripts/check-recipe.mjs",
+    "recipe:check:all": "node scripts/check-all-recipes.mjs",
     "recipe:index": "node scripts/build-index.mjs",
     "icons": "node scripts/make-icons.mjs",
-    "image:strip": "node scripts/strip-jpeg-metadata.mjs"
+    "image:strip": "node scripts/strip-jpeg-metadata.mjs",
+    "verify": "npm run test:ci && npm run build && npm run recipe:check:all"
   },
   "private": true,
   "packageManager": "npm@11.21.0",
